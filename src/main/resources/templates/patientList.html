@@ -7,20 +7,19 @@
         <link rel="stylesheet" type="text/css" href="../../static/bootstrap/bootstrap.min.css"
               th:href="@{bootstrap/bootstrap.min.css}" />
     </head>
-    <body>
+    <body style="background-color: darkseagreen;">
         <div class="container">
             <div class="row">
-                <div class="col-6"></div>
-                <div class="col-6 text-right" style="margin-top: 10px;">
-                    <a th:href="@{/}" class="btn btn-secondary btn-sm" style="min-height: 30px;
-                        min-width: 120px; font-size: 16px; border-color: white;">Revenir à l'Accueil</a>
+                <div class="col-6 text-right" style="margin-top: 15px;margin-bottom: 15px;">
+                    <a th:href="@{/}" class="btn btn-secondary btn-sm" style="min-height: 35px;
+                        min-width: 120px; font-size: 16px;">Revenir à l'Accueil</a>
                 </div>
             </div>
             <div class="row"><h2>Liste des patients</h2></div>
             <div class="row">
                 <form action="#" th:action="@{'/patientList'}" th:method="delete" >
                     <a href="/patient/add" class="btn btn-primary btn-sm" style="margin-right: 10px;
-                    margin-bottom: 10px;">Ajouter un patient</a>
+                    margin-bottom: 10px;background-color: darkgreen; border-color: darkgreen">Ajouter un patient</a>
                     <input type="hidden" name="_method" value="delete" />
                     <button type="submit" id="submitAllButton" class="btn btn-danger btn-sm" style="margin-right: 10px;
                     margin-bottom: 10px;">Tout supprimer</button>
@@ -35,6 +34,7 @@
                         <th>Date de naissance</th>
                         <th>Adresse postale</th>
                         <th>Téléphone</th>
+                        <th>Opérations</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -50,7 +50,8 @@
                                 <form action="#" th:action="@{'/patient/{patientId}'(id=${patient.patientId})}"
                                       th:method="delete"  style="display: flex;">
                                     <a th:href="@{/patient/update/{patientId}(id=${patient.patientId})}"
-                                       class="btn btn-primary btn-sm" style="margin-right: 10px;">Modifier</a>
+                                       class="btn btn-primary btn-sm" style="margin-right: 10px;
+                                       background-color: darkgreen; border-color: darkgreen";>Modifier</a>
                                     <input type="hidden" name="_method" value="delete" />
                                     <button type="submit" id="submitButton" class="btn btn-danger btn-sm">
                                         Supprimer
