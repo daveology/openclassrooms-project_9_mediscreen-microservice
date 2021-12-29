@@ -1,5 +1,6 @@
 package com.mediscreen.controller;
 
+import com.mediscreen.model.Patient;
 import com.mediscreen.service.MediscreenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,15 @@ public class MediscreenController {
     public String home(Model model) {
 
         return "home";
+    }
+
+    @GetMapping("/patient/add")
+    public String createPatient(Model model) {
+
+        Patient patient = new Patient();
+        model.addAttribute("user", patient);
+
+        return "patient/add";
     }
 
     @RequestMapping("/patientList")
