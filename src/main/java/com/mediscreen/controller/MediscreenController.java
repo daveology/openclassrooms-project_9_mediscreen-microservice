@@ -3,9 +3,12 @@ package com.mediscreen.controller;
 import com.mediscreen.model.Patient;
 import com.mediscreen.service.MediscreenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,6 +34,18 @@ public class MediscreenController {
         model.addAttribute("patient", patient);
 
         return "patient/add";
+    }
+
+    @PostMapping("/patient/validate")
+    public String validate(@Valid Patient patient, BindingResult result, Model model) {
+
+        if (!result.hasErrors()) {
+            mediscreenService.createPatient(patient);
+            model.addAttribute("patientList", mediscreenService.readPatientList());
+
+            return "redirect:/patientList";
+        }
+        return "redirect:/";
     }
 
     @RequestMapping("/patientList")
