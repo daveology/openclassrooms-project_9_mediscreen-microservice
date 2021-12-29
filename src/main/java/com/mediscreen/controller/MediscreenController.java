@@ -28,7 +28,7 @@ public class MediscreenController {
     public String createPatient(Model model) {
 
         Patient patient = new Patient();
-        model.addAttribute("user", patient);
+        model.addAttribute("patient", patient);
 
         return "patient/add";
     }
