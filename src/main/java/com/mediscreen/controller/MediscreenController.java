@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 public class MediscreenController {
