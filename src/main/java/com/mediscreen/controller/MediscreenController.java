@@ -1,5 +1,7 @@
 package com.mediscreen.controller;
 
+import com.mediscreen.service.MediscreenService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class MediscreenController {
 
+    @Autowired
+    private MediscreenService mediscreenService;
+
     @RequestMapping("/")
     public String home(Model model) {
 
@@ -21,6 +26,7 @@ public class MediscreenController {
     @RequestMapping("/patientList")
     public String patientList(Model model)
     {
+        model.addAttribute("patientList", mediscreenService.readPatientList());
         return "patientList";
     }
 
