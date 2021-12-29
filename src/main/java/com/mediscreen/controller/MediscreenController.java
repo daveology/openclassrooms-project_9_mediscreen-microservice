@@ -25,7 +25,7 @@ public class MediscreenController {
         if (status != null) {
             Integer statusCode = Integer.valueOf(status.toString());
             if (statusCode == 404) {
-                String errorMessage = "La page est introuvable.";
+                String errorMessage = "Désolé, la page est introuvable.";
                 mav.addObject("errorMsg", errorMessage);
                 mav.setViewName("404");
             }
