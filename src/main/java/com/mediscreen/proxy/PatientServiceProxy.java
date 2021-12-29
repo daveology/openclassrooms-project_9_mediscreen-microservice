@@ -10,5 +10,5 @@ import java.util.Collection;
 public interface PatientServiceProxy {
 
     @GetMapping(value="/patientList")
-    Collection<Patient> getPatientList();
+    Collection<Patient> readPatientList();
 }
