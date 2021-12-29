@@ -18,6 +18,12 @@ public class MediscreenController {
         return "home";
     }
 
+    @RequestMapping("/patientList")
+    public String patientList(Model model)
+    {
+        return "patientList";
+    }
+
     @GetMapping("error")
     public ModelAndView error(HttpServletRequest request, Model model) {
         ModelAndView mav = new ModelAndView();
