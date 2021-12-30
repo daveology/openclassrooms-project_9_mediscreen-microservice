@@ -49,6 +49,14 @@ public class MediscreenController {
         return "patientList";
     }
 
+    @GetMapping("/patient/update/{patientId}")
+    public String updatePatient(@PathVariable("patientId") Long patientId, Model model) {
+
+        Patient patient = mediscreenService.readPatient(patientId);
+        model.addAttribute("patient", patient);
+        return "patient/update";
+    }
+
     @DeleteMapping("/patient/{patientId}")
     public String deletePatient(@PathVariable Long patientId, Model model) {
 
