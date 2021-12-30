@@ -20,7 +20,7 @@ public class MediscreenService {
 
     public Patient readPatient(Long patientId) {
 
-        patientServiceProxy.readPatient(patientId);
+        return patientServiceProxy.readPatient(patientId);
     }
 
     public Collection<Patient> readPatientList() {

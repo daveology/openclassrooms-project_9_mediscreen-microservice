@@ -12,6 +12,9 @@ public interface PatientServiceProxy {
     @RequestMapping(method = RequestMethod.POST, value = "/patient/add", consumes = "application/json")
     Patient createPatient(Patient patient);
 
+    @GetMapping(value="/patient/{patientId}")
+    Patient readPatient(@PathVariable("patientId") Long id);
+
     @GetMapping(value="/patientList")
     Collection<Patient> readPatientList();
 
