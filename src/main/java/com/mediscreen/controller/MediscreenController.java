@@ -3,10 +3,8 @@ package com.mediscreen.controller;
 import com.mediscreen.model.Patient;
 import com.mediscreen.service.MediscreenService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,8 +43,8 @@ public class MediscreenController {
     }
 
     @GetMapping("/patientList")
-    public String patientList(Model model)
-    {
+    public String patientList(Model model) {
+
         model.addAttribute("patientList", mediscreenService.readPatientList());
         return "patientList";
     }
@@ -56,18 +54,25 @@ public class MediscreenController {
 
         mediscreenService.deletePatient(patientId);
         model.addAttribute("patientList", mediscreenService.readPatientList());
-        return "patientList";
+        return "redirect:/patientList";
+    }
+
+    @DeleteMapping("/patientList")
+    public String deletePatientList(Model model) {
+
+        mediscreenService.deletePatientList();
+        model.addAttribute("patientList", mediscreenService.readPatientList());
+        return "redirect:/patientList";
     }
 
     @GetMapping("error")
-    public ModelAndView error(HttpServletRequest request, Model model) {
+    public ModelAndView error(HttpServletRequest request) {
+
         ModelAndView mav = new ModelAndView();
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         if (status != null) {
             Integer statusCode = Integer.valueOf(status.toString());
             if (statusCode == 404) {
-                String errorMessage = "Désolé, la page est introuvable.";
-                mav.addObject("errorMsg", errorMessage);
                 mav.setViewName("404");
             }
         }

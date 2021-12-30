@@ -9,7 +9,7 @@ import java.util.Collection;
 @FeignClient(name = "Patient", url = "localhost:7911")
 public interface PatientServiceProxy {
 
-    @PostMapping(value="/patiant/add")
+    @RequestMapping(method = RequestMethod.POST, value = "/patient/add", consumes = "application/json")
     Patient createPatient(Patient patient);
 
     @GetMapping(value="/patientList")
