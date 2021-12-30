@@ -27,4 +27,9 @@ public class MediscreenService {
 
         patientServiceProxy.deletePatient(patientId);
     }
+
+    public void deletePatientList() {
+
+        patientServiceProxy.deletePatientList();
+    }
 }
