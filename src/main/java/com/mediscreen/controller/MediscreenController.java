@@ -38,15 +38,12 @@ public class MediscreenController {
     }
 
     @PostMapping("/patient/validate")
-    public String validate(@Valid Patient patient, BindingResult result, Model model) {
+    public String validate(@Valid Patient patient, Model model) {
 
-        if (!result.hasErrors()) {
-            mediscreenService.createPatient(patient);
-            model.addAttribute("patientList", mediscreenService.readPatientList());
+        mediscreenService.createPatient(patient);
+        model.addAttribute("patientList", mediscreenService.readPatientList());
 
-            return "redirect:/patientList";
-        }
-        return "redirect:/";
+        return "redirect:/patientList";
     }
 
     @RequestMapping("/patientList")

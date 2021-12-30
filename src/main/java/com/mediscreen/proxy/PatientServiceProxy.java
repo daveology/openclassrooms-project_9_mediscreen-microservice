@@ -2,16 +2,15 @@ package com.mediscreen.proxy;
 
 import com.mediscreen.model.Patient;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
 @FeignClient(name = "Patient", url = "localhost:7911")
 public interface PatientServiceProxy {
 
-    @PostMapping(value="/patient/add")
-    void createPatient(Patient patient);
+    @RequestMapping(method = RequestMethod.POST, value = "/patient/add", consumes = "application/json")
+    Patient createPatient(Patient patient);
 
     @GetMapping(value="/patientList")
     Collection<Patient> readPatientList();
