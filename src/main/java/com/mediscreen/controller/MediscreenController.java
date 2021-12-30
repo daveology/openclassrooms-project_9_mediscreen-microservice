@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -55,6 +52,14 @@ public class MediscreenController {
         Patient patient = mediscreenService.readPatient(patientId);
         model.addAttribute("patient", patient);
         return "patient/update";
+    }
+
+    @PostMapping("/patient/update")
+    public String validateUpdate(@PathVariable("patientId") Long patientId, @Valid Patient patient, Model model) {
+
+        mediscreenService.updatePatient(patient);
+        model.addAttribute("patientList", mediscreenService.readPatientList());
+        return "redirect:/patientList";
     }
 
     @DeleteMapping("/patient/{patientId}")
