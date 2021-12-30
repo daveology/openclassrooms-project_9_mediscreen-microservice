@@ -28,6 +28,11 @@ public class MediscreenService {
         return patientServiceProxy.readPatientList();
     }
 
+    public void updatePatient(Patient patient) {
+
+        patientServiceProxy.updatePatient(patient);
+    }
+
     public void deletePatient(Long patientId) {
 
         patientServiceProxy.deletePatient(patientId);
