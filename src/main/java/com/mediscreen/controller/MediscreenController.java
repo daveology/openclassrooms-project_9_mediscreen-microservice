@@ -7,9 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.RequestDispatcher;
@@ -22,7 +20,7 @@ public class MediscreenController {
     @Autowired
     private MediscreenService mediscreenService;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String home(Model model) {
 
         return "home";
@@ -46,9 +44,17 @@ public class MediscreenController {
         return "redirect:/patientList";
     }
 
-    @RequestMapping("/patientList")
+    @GetMapping("/patientList")
     public String patientList(Model model)
     {
+        model.addAttribute("patientList", mediscreenService.readPatientList());
+        return "patientList";
+    }
+
+    @DeleteMapping("/patient/{patientId}")
+    public String deletePatient(@PathVariable Long patientId, Model model) {
+
+        mediscreenService.deletePatient(patientId);
         model.addAttribute("patientList", mediscreenService.readPatientList());
         return "patientList";
     }
