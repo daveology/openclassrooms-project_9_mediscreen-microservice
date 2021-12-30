@@ -30,5 +30,5 @@ public interface PatientServiceProxy {
 
     @RequestMapping(method = RequestMethod.POST, value = "/addPatient", consumes = "application/json")
     Patient addPatient(@RequestParam String family, @RequestParam String given, @RequestParam LocalDate dob,
-                    @RequestParam String address, @RequestParam String phone);
+                       @RequestParam LocalDate sex, @RequestParam String address, @RequestParam String phone);
 }

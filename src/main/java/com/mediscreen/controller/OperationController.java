@@ -17,8 +17,8 @@ public class OperationController {
 
     @PostMapping("/add")
     public Patient addPatient(@RequestParam String family, @RequestParam String given, @RequestParam LocalDate dob,
-                              @RequestParam String address, @RequestParam String phone) {
+                              @RequestParam LocalDate sex, @RequestParam String address, @RequestParam String phone) {
 
-        return patientServiceProxy.addPatient(family, given, dob, address, phone);
+        return patientServiceProxy.addPatient(family, given, dob, sex, address, phone);
     }
 }
