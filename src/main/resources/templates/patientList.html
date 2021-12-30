@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Liste des patients | Mediscreen App</title>
+        <link rel="stylesheet" type="text/css" href="../../static/bootstrap/bootstrap.min.css"
+              th:href="@{bootstrap/bootstrap.min.css}" />
+    </head>
+    <body style="background-color: darkseagreen;">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 text-right" style="margin-top: 15px;margin-bottom: 15px;">
+                    <a th:href="@{/}" class="btn btn-secondary btn-sm" style="min-height: 35px;
+                        min-width: 120px; font-size: 16px;">Revenir à l'Accueil</a>
+                </div>
+            </div>
+            <div class="row"><h2>Liste des patients</h2></div>
+            <div class="row">
+                <form action="#" th:action="@{'/patientList'}" th:method="delete" >
+                    <a href="/patient/add" class="btn btn-primary btn-sm" style="margin-right: 10px;
+                    margin-bottom: 10px;background-color: darkgreen; border-color: darkgreen">Ajouter un patient</a>
+                    <input type="hidden" name="_method" value="delete" />
+                    <button type="submit" id="submitAllButton" class="btn btn-danger btn-sm" style="margin-right: 10px;
+                    margin-bottom: 10px;">Tout supprimer</button>
+                </form>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Sexe</th>
+                        <th>Date de naissance</th>
+                        <th>Adresse postale</th>
+                        <th>Téléphone</th>
+                        <th>Opérations</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="patient : ${patientList}">
+                            <td th:text="${patient.patientId}"></td>
+                            <td style="font-weight: bold;" th:text="${patient.firstName}"></td>
+                            <td style="font-weight: bold;" th:text="${patient.lastName}"></td>
+                            <td th:text="${patient.gender}"></td>
+                            <td th:text="${patient.birthDate}"></td>
+                            <td th:text="${patient.address}"></td>
+                            <td th:text="${patient.phone}"></td>
+                            <td style="width: 15%" class="text-center">
+                                <form action="#" th:action="@{'/patient/{patientId}'(patientId=${patient.patientId})}"
+                                      th:method="delete"  style="display: flex;">
+                                    <a th:href="@{/patient/update/{patientId}(patientId=${patient.patientId})}"
+                                       class="btn btn-primary btn-sm" style="margin-right: 10px;
+                                       background-color: darkgreen; border-color: darkgreen";>Modifier</a>
+                                    <input type="hidden" name="_method" value="delete" />
+                                    <button type="submit" id="submitButton" class="btn btn-danger btn-sm">
+                                        Supprimer
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

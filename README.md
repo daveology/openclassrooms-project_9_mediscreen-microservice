@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="src/main/resources/static/logo.png" alt="logo" height="64" />
+    <img src="src/main/resources/static/images/logo.png" alt="logo" height="64" />
     <h3 align="center">Mediscreen App<i></i></h3>
     <p align="center">
         We are a solution for you!
@@ -39,7 +39,7 @@
 <p id="introduction"></p>
 
 <div align="center">
-    <img src="src/main/resources/static/intro.PNG" alt="header" />
+    <img src="src/main/resources/static/images/intro.PNG" alt="header" />
 </div>
 
 <!-- ACKNOWLEDGEMENTS -->
