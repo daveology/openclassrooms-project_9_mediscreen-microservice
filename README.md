@@ -1,9 +1,9 @@
-![version](https://img.shields.io/badge/Latest_Pre--release-v0.0.1-purple) ![version](https://img.shields.io/badge/Java-1.8.0__312-red) ![version](https://img.shields.io/badge/Spring_Boot-2.6.2-green)
+![version](https://img.shields.io/badge/Latest_Pre--release-v0.1.0-purple) ![version](https://img.shields.io/badge/Java-1.8.0__312-red) ![version](https://img.shields.io/badge/Spring_Boot-2.6.2-green)
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="src/main/resources/static/logo.png" alt="logo" height="64" />
+    <img src="src/main/resources/static/images/logo.png" alt="logo" height="64" />
     <h3 align="center">Mediscreen App<i></i></h3>
     <p align="center">
         We are a solution for you!
@@ -39,7 +39,7 @@
 <p id="introduction"></p>
 
 <div align="center">
-    <img src="src/main/resources/static/intro.PNG" alt="header" />
+    <img src="src/main/resources/static/images/intro.PNG" alt="header" />
 </div>
 
 <!-- ACKNOWLEDGEMENTS -->

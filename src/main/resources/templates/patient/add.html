@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Ajout de patient | Mediscreen App</title>
+        <link rel="stylesheet" type="text/css" href="../../static/bootstrap/bootstrap.min.css"
+              th:href="@{bootstrap/bootstrap.min.css}" />
+    </head>
+    <body style="background-color: darkseagreen;">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 text-right" style="margin-top: 15px;margin-bottom: 15px;">
+                    <a th:href="@{/}" class="btn btn-secondary btn-sm" style="min-height: 35px;
+                                min-width: 120px; font-size: 16px;">Revenir à l'Accueil</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h2>Ajouter un patient</h2>
+        </div>
+        <div class="row">
+            <form action="#" th:action="@{/patient/validate}" th:object="${patient}" method="post"
+                  class="form-horizontal" style="width: 100%">
+                <div class="form-group">
+                    <label for="firstName" class="col-sm-2 control-label">Prénom</label>
+                    <div class="col-sm-10">
+                        <input type="text" th:field="*{firstName}" id="firstName"
+                               placeholder="Votre prénom..." class="col-4">
+                        <p class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName" class="col-sm-2 control-label">Nom</label>
+                    <div class="col-sm-10">
+                        <input type="text" th:field="*{lastName}" id="lastName"
+                               placeholder="Votre nom de famille..." class="col-4">
+                        <p class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="birthDate" class="col-sm-2 control-label">Date de naissance</label>
+                    <div class="col-sm-10">
+                        <input type="text" th:field="*{birthDate}" id="birthDate"
+                               placeholder="Votre date de naissance..." class="col-4">
+                        <p class="text-danger" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address" class="col-sm-2 control-label">Courriel</label>
+                    <div class="col-sm-10">
+                        <input type="text" th:field="*{address}" id="address"
+                               placeholder="Votre adresse postale..." class="col-4">
+                        <p class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="col-sm-2 control-label">Téléphone</label>
+                    <div class="col-sm-10">
+                        <input type="text" th:field="*{phone}" id="phone"
+                               placeholder="Votre n° de téléphone..." class="col-4">
+                        <p class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="gender" class="col-sm-2 control-label">Sexe</label>
+                    <div class="col-sm-10">
+                        <label class="checkbox-inline"><input type="radio"  id="gender" th:field="*{gender}"
+                                                              th:value="M"> Homme</label>
+                        <label class="checkbox-inline"><input type="radio"  th:field="*{gender}"
+                                                              th:value="F"> Femme</label>
+                        <p class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <a class="btn btn-danger btn-sm" href="/patientList">Annuler</a>
+                        <input class="btn btn-primary btn-sm" type="submit" value="Enregistrer">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
