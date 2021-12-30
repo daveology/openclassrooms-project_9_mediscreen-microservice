@@ -38,8 +38,8 @@
                     </thead>
                     <tbody>
                         <tr th:each="patient : ${patientList}">
-                            <td style="font-weight: bold;" th:text="${patient.riskLevel}"></td>
-                            <td style="font-weight: bold;" th:text="${patient.fullName}"></td>
+                            <td style="font-weight: bold;text-transform: uppercase;" th:text="${patient.riskLevel}"></td>
+                            <td><a th:href="@{/}" th:text="${patient.fullName}" class="btn btn-secondary btn-sm"></a></td>
                             <td th:text="${patient.gender}"></td>
                             <td th:text="${patient.birthDate}"></td>
                             <td th:text="${patient.address}"></td>
