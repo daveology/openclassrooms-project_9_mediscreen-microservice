@@ -18,6 +18,9 @@ public interface PatientServiceProxy {
     @GetMapping(value="/patientList")
     Collection<Patient> readPatientList();
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/patient/update", consumes = "application/json")
+    Patient updatePatient(Patient patient);
+
     @DeleteMapping(value="/patient/{patientId}")
     void deletePatient(@PathVariable("patientId") Long id);
 
