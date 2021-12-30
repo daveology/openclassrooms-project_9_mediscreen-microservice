@@ -9,9 +9,12 @@ import java.util.Collection;
 @FeignClient(name = "Patient", url = "localhost:7911")
 public interface PatientServiceProxy {
 
-    @RequestMapping(method = RequestMethod.POST, value = "/patient/add", consumes = "application/json")
+    @PostMapping(value="/patiant/add")
     Patient createPatient(Patient patient);
 
     @GetMapping(value="/patientList")
     Collection<Patient> readPatientList();
+
+    @DeleteMapping(value="/patiant/{patientId}")
+    void deletePatient(@PathVariable Long patientId);
 }
