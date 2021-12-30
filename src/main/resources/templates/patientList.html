@@ -27,9 +27,8 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Prénom</th>
-                        <th>Nom</th>
+                        <th>Risque</th>
+                        <th>Nom complet</th>
                         <th>Sexe</th>
                         <th>Date de naissance</th>
                         <th>Adresse postale</th>
@@ -39,9 +38,8 @@
                     </thead>
                     <tbody>
                         <tr th:each="patient : ${patientList}">
-                            <td th:text="${patient.patientId}"></td>
-                            <td style="font-weight: bold;" th:text="${patient.firstName}"></td>
-                            <td style="font-weight: bold;" th:text="${patient.lastName}"></td>
+                            <td style="font-weight: bold;" th:text="${patient.riskLevel}"></td>
+                            <td style="font-weight: bold;" th:text="${patient.fullName}"></td>
                             <td th:text="${patient.gender}"></td>
                             <td th:text="${patient.birthDate}"></td>
                             <td th:text="${patient.address}"></td>
