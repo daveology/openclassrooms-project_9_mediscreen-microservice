@@ -55,7 +55,7 @@ public class MediscreenController {
     }
 
     @PostMapping("/patient/update")
-    public String validateUpdate(@PathVariable("patientId") Long patientId, @Valid Patient patient, Model model) {
+    public String validateUpdate(@Valid Patient patient, Model model) {
 
         mediscreenService.updatePatient(patient);
         model.addAttribute("patientList", mediscreenService.readPatientList());
