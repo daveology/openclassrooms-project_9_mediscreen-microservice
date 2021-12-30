@@ -4,6 +4,7 @@ import com.mediscreen.model.Patient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 @FeignClient(name = "Patient", url = "localhost:7911")
@@ -26,4 +27,8 @@ public interface PatientServiceProxy {
 
     @DeleteMapping(value="/patientList")
     void deletePatientList();
+
+    @RequestMapping(method = RequestMethod.POST, value = "/addPatient", consumes = "application/json")
+    Patient addPatient(@RequestParam String family, @RequestParam String given, @RequestParam LocalDate dob,
+                    @RequestParam String address, @RequestParam String phone);
 }
