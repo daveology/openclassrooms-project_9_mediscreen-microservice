@@ -18,6 +18,11 @@ public class MediscreenService {
         patientServiceProxy.createPatient(patient);
     }
 
+    public Patient readPatient(Long patientId) {
+
+        patientServiceProxy.readPatient(patientId);
+    }
+
     public Collection<Patient> readPatientList() {
 
         return patientServiceProxy.readPatientList();
