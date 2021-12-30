@@ -22,4 +22,9 @@ public class MediscreenService {
 
         return patientServiceProxy.readPatientList();
     }
+
+    public void deletePatient(Long patientId) {
+
+        patientServiceProxy.deletePatient(patientId);
+    }
 }
