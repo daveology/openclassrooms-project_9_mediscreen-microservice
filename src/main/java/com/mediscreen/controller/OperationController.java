@@ -15,7 +15,7 @@ public class OperationController {
     @Autowired
     private PatientServiceProxy patientServiceProxy;
 
-    @PostMapping("/add")
+    @PostMapping("/patient/add")
     public Patient addPatient(@RequestParam String family, @RequestParam String given, @RequestParam String dob,
                               @RequestParam String sex, @RequestParam String address, @RequestParam String phone) {
 

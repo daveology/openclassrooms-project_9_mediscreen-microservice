@@ -21,13 +21,13 @@ public class MediscreenController {
         return "home";
     }
 
-    @GetMapping("/patient/add")
+    @GetMapping("/patient/create")
     public String createPatient(Model model) {
 
         Patient patient = new Patient();
         model.addAttribute("patient", patient);
 
-        return "patient/add";
+        return "patient/create";
     }
 
     @PostMapping("/patient/validate")
