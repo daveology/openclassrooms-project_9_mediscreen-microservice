@@ -11,7 +11,7 @@ import java.util.Collection;
 public interface PatientServiceProxy {
 
     @PostMapping(value="/patient/add")
-    Collection<Patient> createPatient();
+    void createPatient(Patient patient);
 
     @GetMapping(value="/patientList")
     Collection<Patient> readPatientList();

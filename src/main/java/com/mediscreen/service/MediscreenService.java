@@ -13,6 +13,11 @@ public class MediscreenService {
     @Autowired
     private PatientServiceProxy patientServiceProxy;
 
+    public void createPatient(Patient patient) {
+
+        patientServiceProxy.createPatient(patient);
+    }
+
     public Collection<Patient> readPatientList() {
 
         return patientServiceProxy.readPatientList();
