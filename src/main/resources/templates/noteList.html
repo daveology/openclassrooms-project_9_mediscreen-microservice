@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
-    <title>Notes sur le patient | Mediscreen App</title>
+    <title>Notes du patient | Mediscreen App</title>
     <link rel="stylesheet" type="text/css" href="../../static/bootstrap/bootstrap.min.css"
           th:href="@{bootstrap/bootstrap.min.css}" />
 </head>
@@ -11,13 +11,14 @@
 <div class="container">
     <div class="row">
         <div class="col-6 text-right" style="margin-top: 15px;margin-bottom: 15px;">
-            <a th:href="@{/}" class="btn btn-secondary btn-sm" style="min-height: 35px;
-                        min-width: 120px; font-size: 16px;">Revenir à l'Accueil</a>
+            <a th:href="@{/patientList}" class="btn btn-secondary btn-sm" style="min-height: 35px;
+                        min-width: 120px; font-size: 16px;">Revenir à la liste des patients</a>
         </div>
     </div>
-    <div class="row"><h2>Note sur le patient</h2></div>
+    <div class="row"><h2>Liste de notes du patient</h2></div>
     <div class="row">
-        <form action="#" th:action="@{'/noteList/{patientId}'(patientId=${patientId})}" th:object="${patientId}" th:method="delete" >
+        <form action="#" th:action="@{'/noteList/{patientId}'(patientId=${patientId})}"  th:object="${note}" method="post"
+              class="form-horizontal" style="width: 100%">
             <div class="form-group">
                 <div class="col-sm-10">
                     <input type="text" th:field="*{content}" id="content"
@@ -25,8 +26,13 @@
                     <p class="text-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p>
                 </div>
             </div>
-            <a href="/noteList/create" class="btn btn-primary btn-sm" style="margin-right: 10px;
-                    margin-bottom: 10px;background-color: darkgreen; border-color: darkgreen">Ajouter une note</a>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input class="btn btn-primary btn-sm" type="submit" value="Ajouter une note">
+                </div>
+            </div>
+        </form>
+        <form action="#" th:action="@{'/noteList/{patientId}'(patientId=${patientId})}" th:object="${patientId}" th:method="delete" >
             <input type="hidden" name="_method" value="delete" />
             <button type="submit" id="submitAllButton" class="btn btn-danger btn-sm" style="margin-right: 10px;
                     margin-bottom: 10px;">Tout supprimer</button>

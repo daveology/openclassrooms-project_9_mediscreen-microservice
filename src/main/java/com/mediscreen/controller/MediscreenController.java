@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 
 @Controller
 public class MediscreenController {
@@ -41,8 +42,10 @@ public class MediscreenController {
     }
 
     @PostMapping("/noteList/{patientId}")
-    public String createPatient(@PathVariable Long patientId, Note note, Model model) {
+    public String createNote(@PathVariable Long patientId, Note note, Model model) {
 
+        note.setPatientId(patientId);
+        note.setNoteDate(LocalDate.now());
         mediscreenService.createNote(note);
         model.addAttribute("patientId", patientId);
         model.addAttribute("patientList", mediscreenService.readNoteList(patientId));
@@ -60,6 +63,8 @@ public class MediscreenController {
     @GetMapping("/noteList/{patientId}")
     public String noteList(@PathVariable("patientId") Long patientId, Model model) {
 
+        Note note = new Note();
+        model.addAttribute("note", note);
         model.addAttribute("patientId", patientId);
         model.addAttribute("noteList", mediscreenService.readNoteList(patientId));
         return "noteList";
