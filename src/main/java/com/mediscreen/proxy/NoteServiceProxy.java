@@ -1,7 +1,6 @@
 package com.mediscreen.proxy;
 
 import com.mediscreen.model.Note;
-import com.mediscreen.model.Patient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +10,7 @@ import java.util.Collection;
 public interface NoteServiceProxy {
 
     @RequestMapping(method = RequestMethod.POST, value = "/note/add", consumes = "application/json")
-    Patient createNote(Note note);
+    Note createNote(Note note);
 
     @GetMapping(value="/noteList/{patientId}")
     Collection<Note> readNote(@PathVariable("patientId") Long patientId);

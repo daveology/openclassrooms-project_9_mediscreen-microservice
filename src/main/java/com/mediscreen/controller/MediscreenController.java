@@ -1,5 +1,6 @@
 package com.mediscreen.controller;
 
+import com.mediscreen.model.Note;
 import com.mediscreen.model.Patient;
 import com.mediscreen.service.MediscreenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,15 @@ public class MediscreenController {
         model.addAttribute("patientList", mediscreenService.readPatientList());
 
         return "redirect:/patientList";
+    }
+
+    @PostMapping("/note/add")
+    public String createPatient(Note note, Model model) {
+
+        mediscreenService.createNote(note);
+        model.addAttribute("patientList", mediscreenService.readPatientList());
+
+        return "redirect:/noteList/{patientId}";
     }
 
     @GetMapping("/patientList")
