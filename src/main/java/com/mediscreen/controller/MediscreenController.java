@@ -56,6 +56,13 @@ public class MediscreenController {
         return "patientList";
     }
 
+    @GetMapping("/noteList/{patientId}")
+    public String noteList(@PathVariable("patientId") Long patientId, Model model) {
+
+        model.addAttribute("noteList", mediscreenService.readNoteList());
+        return "noteList";
+    }
+
     @GetMapping("/patient/update/{patientId}")
     public String updatePatient(@PathVariable("patientId") Long patientId, Model model) {
 
