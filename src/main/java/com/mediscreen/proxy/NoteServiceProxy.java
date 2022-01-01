@@ -18,4 +18,7 @@ public interface NoteServiceProxy {
 
     @DeleteMapping(value="/note/{patientId}")
     void deleteNote(@PathVariable("patientId") Long patientId);
+
+    @DeleteMapping(value="/noteList")
+    void deleteNoteList();
 }
