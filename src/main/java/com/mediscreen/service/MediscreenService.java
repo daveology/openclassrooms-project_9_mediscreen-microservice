@@ -1,6 +1,7 @@
 package com.mediscreen.service;
 
 import com.mediscreen.model.Patient;
+import com.mediscreen.proxy.NoteServiceProxy;
 import com.mediscreen.proxy.PatientServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,9 @@ public class MediscreenService {
 
     @Autowired
     private PatientServiceProxy patientServiceProxy;
+
+    @Autowired
+    private NoteServiceProxy noteServiceProxy;
 
     public void createPatient(Patient patient) {
 
@@ -38,6 +42,11 @@ public class MediscreenService {
         patientServiceProxy.deletePatient(patientId);
     }
 
+    public void deleteNoteById(Long noteId) {
+
+        noteServiceProxy.deleteNote(noteId);
+    }
+
     public void deletePatientList() {
 
         patientServiceProxy.deletePatientList();
@@ -45,6 +54,6 @@ public class MediscreenService {
 
     public void deleteNoteList() {
 
-        patientServiceProxy.deleteNoteList();
+        noteServiceProxy.deleteNoteList();
     }
 }

@@ -60,7 +60,7 @@ public class MediscreenController {
     public String noteList(@PathVariable("patientId") Long patientId, Model model) {
 
         model.addAttribute("noteList", mediscreenService.readNoteList());
-        return "noteList";
+        return "redirect:/noteList/{patientId}";
     }
 
     @GetMapping("/patient/update/{patientId}")
@@ -90,8 +90,8 @@ public class MediscreenController {
     @DeleteMapping("/noteList/{noteId}")
     public String deleteNoteById(@PathVariable Long noteId, Model model) {
 
-        mediscreenService.deletePatient(noteId);
-        model.addAttribute("noteId", mediscreenService.deleteNoteById(noteId));
+        mediscreenService.deleteNoteById(noteId);
+        model.addAttribute("noteList", mediscreenService.readNoteList());
         return "redirect:/noteList/{patientId}";
     }
 
@@ -106,8 +106,8 @@ public class MediscreenController {
     @DeleteMapping("/noteList")
     public String deleteNoteList(Model model) {
 
-        mediscreenService.deletePatientList();
-        model.addAttribute("noteList", mediscreenService.deleteNoteList());
+        mediscreenService.deleteNoteList();
+        model.addAttribute("noteList", mediscreenService.readNoteList());
         return "redirect:/noteList/{patientId}";
     }
 }
