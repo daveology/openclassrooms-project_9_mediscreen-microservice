@@ -14,8 +14,8 @@ public interface NoteServiceProxy {
     Patient createNote(Note note);
 
     @GetMapping(value="/noteList/{patientId}")
-    Collection<Note> readPatient(@PathVariable("patientId") Long patientId);
+    Collection<Note> readNote(@PathVariable("patientId") Long patientId);
 
     @DeleteMapping(value="/note/{patientId}")
-    void deletePatient(@PathVariable("patientId") Long patientId);
+    void deleteNote(@PathVariable("patientId") Long patientId);
 }
