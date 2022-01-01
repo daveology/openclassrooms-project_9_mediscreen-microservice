@@ -9,14 +9,14 @@ import java.util.Collection;
 @FeignClient(name = "Note", url = "localhost:7922")
 public interface NoteServiceProxy {
 
-    @RequestMapping(method = RequestMethod.POST, value = "/note/add", consumes = "application/json")
+    @RequestMapping(method = RequestMethod.POST, value = "/noteList/{patientId}", consumes = "application/json")
     Note createNote(Note note);
 
     @GetMapping(value="/noteList/{patientId}")
     Collection<Note> readNoteList(@PathVariable("patientId") Long patientId);
 
-    @DeleteMapping(value="/note/{patientId}")
-    void deleteNote(@PathVariable("patientId") Long patientId);
+    @DeleteMapping(value="/note/{noteId}")
+    void deleteNote(@PathVariable("noteId") Long noteId);
 
     @DeleteMapping(value="/noteList")
     void deleteNoteList();

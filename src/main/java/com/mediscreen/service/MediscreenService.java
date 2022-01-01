@@ -1,5 +1,6 @@
 package com.mediscreen.service;
 
+import com.mediscreen.model.Note;
 import com.mediscreen.model.Patient;
 import com.mediscreen.proxy.NoteServiceProxy;
 import com.mediscreen.proxy.PatientServiceProxy;
@@ -22,6 +23,11 @@ public class MediscreenService {
         patientServiceProxy.createPatient(patient);
     }
 
+    public void createNote(Note note) {
+
+        noteServiceProxy.createNote(note);
+    }
+
     public Patient readPatient(Long patientId) {
 
         return patientServiceProxy.readPatient(patientId);
@@ -30,6 +36,11 @@ public class MediscreenService {
     public Collection<Patient> readPatientList() {
 
         return patientServiceProxy.readPatientList();
+    }
+
+    public Collection<Note> readNoteList(Long patientId) {
+
+        return noteServiceProxy.readNoteList(patientId);
     }
 
     public void updatePatient(Patient patient) {

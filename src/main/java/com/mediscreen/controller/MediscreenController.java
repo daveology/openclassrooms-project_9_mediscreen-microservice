@@ -40,11 +40,11 @@ public class MediscreenController {
         return "redirect:/patientList";
     }
 
-    @PostMapping("/note/add")
-    public String createPatient(Note note, Model model) {
+    @PostMapping("/noteList/{patientId}")
+    public String createPatient(@PathVariable Long patientId, Note note, Model model) {
 
         mediscreenService.createNote(note);
-        model.addAttribute("patientList", mediscreenService.readPatientList());
+        model.addAttribute("patientList", mediscreenService.readNoteList(patientId));
 
         return "redirect:/noteList/{patientId}";
     }
@@ -59,7 +59,7 @@ public class MediscreenController {
     @GetMapping("/noteList/{patientId}")
     public String noteList(@PathVariable("patientId") Long patientId, Model model) {
 
-        model.addAttribute("noteList", mediscreenService.readNoteList());
+        model.addAttribute("noteList", mediscreenService.readNoteList(patientId));
         return "redirect:/noteList/{patientId}";
     }
 
@@ -87,11 +87,11 @@ public class MediscreenController {
         return "redirect:/patientList";
     }
 
-    @DeleteMapping("/noteList/{noteId}")
-    public String deleteNoteById(@PathVariable Long noteId, Model model) {
+    @DeleteMapping("/noteList/{patientId}/{noteId}")
+    public String deleteNoteById(@PathVariable Long patientId, @PathVariable Long noteId, Model model) {
 
         mediscreenService.deleteNoteById(noteId);
-        model.addAttribute("noteList", mediscreenService.readNoteList());
+        model.addAttribute("noteList", mediscreenService.readNoteList(patientId));
         return "redirect:/noteList/{patientId}";
     }
 
@@ -103,11 +103,11 @@ public class MediscreenController {
         return "redirect:/patientList";
     }
 
-    @DeleteMapping("/noteList")
-    public String deleteNoteList(Model model) {
+    @DeleteMapping("/noteList/{patientId}")
+    public String deleteNoteList(@PathVariable Long patientId, Model model) {
 
         mediscreenService.deleteNoteList();
-        model.addAttribute("noteList", mediscreenService.readNoteList());
+        model.addAttribute("noteList", mediscreenService.readNoteList(patientId));
         return "redirect:/noteList/{patientId}";
     }
 }
