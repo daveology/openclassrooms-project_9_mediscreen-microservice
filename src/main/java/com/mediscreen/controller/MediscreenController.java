@@ -102,4 +102,12 @@ public class MediscreenController {
         model.addAttribute("patientList", mediscreenService.readPatientList());
         return "redirect:/patientList";
     }
+
+    @DeleteMapping("/noteList")
+    public String deleteNoteList(Model model) {
+
+        mediscreenService.deletePatientList();
+        model.addAttribute("noteList", mediscreenService.deleteNoteList());
+        return "redirect:/noteList/{patientId}";
+    }
 }
