@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @Controller
 public class MediscreenController {
@@ -65,9 +66,22 @@ public class MediscreenController {
 
         Note note = new Note();
         model.addAttribute("note", note);
+        Patient patient = mediscreenService.readPatient(patientId);
         model.addAttribute("patientId", patientId);
+        model.addAttribute("age", ChronoUnit.YEARS.between(patient.getBirthDate(), LocalDate.now()));
+        model.addAttribute("gender", patient.getGender());
         model.addAttribute("noteList", mediscreenService.readNoteList(patientId));
         return "noteList";
+    }
+
+    @GetMapping("/generateReport/{patientId}")
+    public String patientList(@PathVariable("patientId") Long patientId, Model model) {
+
+        Note note = new Note();
+        model.addAttribute("note", note);
+        model.addAttribute("patientId", patientId);
+        model.addAttribute("patientList", mediscreenService.readPatientList());
+        return "redirect:/noteList/{patientId}";
     }
 
     @GetMapping("/patient/update/{patientId}")
