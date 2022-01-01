@@ -4,6 +4,7 @@ import com.mediscreen.model.Note;
 import com.mediscreen.model.Patient;
 import com.mediscreen.proxy.NoteServiceProxy;
 import com.mediscreen.proxy.PatientServiceProxy;
+import com.mediscreen.proxy.ReportServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,10 @@ public class MediscreenService {
 
     @Autowired
     private PatientServiceProxy patientServiceProxy;
-
     @Autowired
     private NoteServiceProxy noteServiceProxy;
+    @Autowired
+    private ReportServiceProxy reportServiceProxy;
 
     public void createPatient(Patient patient) {
 
@@ -41,6 +43,15 @@ public class MediscreenService {
     public Collection<Note> readNoteList(Long patientId) {
 
         return noteServiceProxy.readNoteList(patientId);
+    }
+
+    public void generateReport(Long patientId, int age, String gender,
+                               Collection<Note> noteList) {
+
+        String riskLevel = reportServiceProxy.generateReport(age, gender, noteList);
+        Patient patient = readPatient(patientId);
+        patient.setRiskLevel(riskLevel);
+        patientServiceProxy.updatePatient(patient);
     }
 
     public void updatePatient(Patient patient) {

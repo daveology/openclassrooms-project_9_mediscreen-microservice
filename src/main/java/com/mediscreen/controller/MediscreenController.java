@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Collection;
 
 @Controller
 public class MediscreenController {
@@ -75,8 +76,10 @@ public class MediscreenController {
     }
 
     @GetMapping("/generateReport/{patientId}")
-    public String patientList(@PathVariable("patientId") Long patientId, Model model) {
+    public String generateReport(@PathVariable("patientId") Long patientId, int age,
+                                 String gender, Collection<Note> noteList, Model model) {
 
+        mediscreenService.generateReport(patientId, age, gender, noteList);
         Note note = new Note();
         model.addAttribute("note", note);
         model.addAttribute("patientId", patientId);

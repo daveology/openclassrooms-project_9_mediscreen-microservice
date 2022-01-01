@@ -11,7 +11,7 @@ import java.util.Collection;
 public interface ReportServiceProxy {
 
     @GetMapping(value="/generateReport")
-    Long generateReport(@RequestParam("age") int age,
-                                  @RequestParam("gender") int gender,
+    String generateReport(@RequestParam("age") int age,
+                                  @RequestParam("gender") String gender,
                                   Collection<Note> noteList);
 }
