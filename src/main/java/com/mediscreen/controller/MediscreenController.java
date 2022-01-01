@@ -87,6 +87,14 @@ public class MediscreenController {
         return "redirect:/patientList";
     }
 
+    @DeleteMapping("/noteList/{noteId}")
+    public String deleteNoteById(@PathVariable Long noteId, Model model) {
+
+        mediscreenService.deletePatient(noteId);
+        model.addAttribute("noteId", mediscreenService.deleteNoteById(noteId));
+        return "redirect:/noteList/{patientId}";
+    }
+
     @DeleteMapping("/patientList")
     public String deletePatientList(Model model) {
 
