@@ -84,7 +84,7 @@ public class MediscreenController {
     @GetMapping("/generateReport")
     public String generateReport(ReportEntriesDto entries, Model model) {
 
-        mediscreenService.generateReport(entries.getPatientId(), entries.getAge(), entries.getGender(), entries.getNoteList());
+        mediscreenService.generateReport(entries);
         Collection<Note> noteList = mediscreenService.readNoteList(entries.getPatientId());
         Patient patient = mediscreenService.readPatient(entries.getPatientId());
         entries = new ReportEntriesDto();

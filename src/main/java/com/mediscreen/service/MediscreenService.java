@@ -1,5 +1,6 @@
 package com.mediscreen.service;
 
+import com.mediscreen.dto.ReportEntriesDto;
 import com.mediscreen.model.Note;
 import com.mediscreen.model.Patient;
 import com.mediscreen.proxy.NoteServiceProxy;
@@ -45,11 +46,10 @@ public class MediscreenService {
         return noteServiceProxy.readNoteList(patientId);
     }
 
-    public void generateReport(Long patientId, int age, String gender,
-                               Collection<Note> noteList) {
+    public void generateReport(ReportEntriesDto entries) {
 
-        String riskLevel = reportServiceProxy.generateReport(age, gender, noteList);
-        Patient patient = readPatient(patientId);
+        String riskLevel = reportServiceProxy.generateReport(entries);
+        Patient patient = readPatient(entries.getPatientId());
         patient.setRiskLevel(riskLevel);
         patientServiceProxy.updatePatient(patient);
     }
