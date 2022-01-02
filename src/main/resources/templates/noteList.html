@@ -38,7 +38,7 @@
                 <td th:text="${patient.phone}"></td>
                 <td style="width: 15%" class="text-center">
                     <form action="#" th:action="@{'/generateReport'}" th:object="${entries}"
-                          th:method="get"  style="display: flex;">
+                          th:method="post"  style="display: flex;">
                         <button type="submit" class="btn btn-danger btn-sm">
                             Générer un rapport
                         </button>

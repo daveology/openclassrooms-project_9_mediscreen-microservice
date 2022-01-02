@@ -81,14 +81,14 @@ public class MediscreenController {
         return "noteList";
     }
 
-    @GetMapping("/generateReport")
+    @PostMapping("/generateReport")
     public String generateReport(ReportEntriesDto entries, Model model) {
 
         mediscreenService.generateReport(entries);
         Collection<Note> noteList = mediscreenService.readNoteList(entries.getPatientId());
         Patient patient = mediscreenService.readPatient(entries.getPatientId());
         entries = new ReportEntriesDto();
-        entries.setPatientId(entries.getPatientId());
+        entries.setPatientId(patient.getPatientId());
         entries.setAge((int) ChronoUnit.YEARS.between(patient.getBirthDate(), LocalDate.now()));
         entries.setGender(patient.getGender());
         entries.setNoteList(noteList);
