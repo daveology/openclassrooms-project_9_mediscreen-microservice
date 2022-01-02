@@ -15,9 +15,42 @@
                         min-width: 120px; font-size: 16px;">Revenir à la liste des patients</a>
         </div>
     </div>
-    <div class="row"><h2>Liste de notes du patient</h2></div>
     <div class="row">
-        <form action="#" th:action="@{'/noteList/{patientId}'(patientId=${patientId})}"  th:object="${note}" method="post"
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Risque de diabète</th>
+                <th>Nom complet</th>
+                <th>Sexe</th>
+                <th>Date de naissance</th>
+                <th>Adresse postale</th>
+                <th>Téléphone</th>
+                <th>Rapport</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:object="${patient}">
+                <td style="font-weight: bold;text-transform: uppercase;" th:text="${patient.riskLevel}"></td>
+                <td th:text="${patient.fullName}"></td>
+                <td th:text="${patient.gender}"></td>
+                <td th:text="${patient.birthDate}"></td>
+                <td th:text="${patient.address}"></td>
+                <td th:text="${patient.phone}"></td>
+                <td style="width: 15%" class="text-center">
+                    <form action="#" th:action="@{'/generateReport/{patientId}'(patientId=${patientId})}" th:object="${patientId}"
+                          th:method="get"  style="display: flex;">
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            Générer un rapport
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row"><h2>Fiche du patient (Notes)</h2></div>
+    <div class="row">
+        <form action="#" th:action="@{'/noteList/{patientId}?age={age}?gender={gender}'(patientId=${patientId}, age=${age}, gender=${gender})}"  th:object="${note}" method="post"
               class="form-horizontal" style="width: 100%">
             <div class="form-group">
                 <div class="col-sm-10">

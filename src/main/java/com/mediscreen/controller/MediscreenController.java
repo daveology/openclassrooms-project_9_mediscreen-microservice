@@ -68,6 +68,7 @@ public class MediscreenController {
         Note note = new Note();
         model.addAttribute("note", note);
         Patient patient = mediscreenService.readPatient(patientId);
+        model.addAttribute("patient", patient);
         model.addAttribute("patientId", patientId);
         model.addAttribute("age", ChronoUnit.YEARS.between(patient.getBirthDate(), LocalDate.now()));
         model.addAttribute("gender", patient.getGender());
