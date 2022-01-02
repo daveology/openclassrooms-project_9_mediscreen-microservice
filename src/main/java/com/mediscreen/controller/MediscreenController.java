@@ -1,5 +1,6 @@
 package com.mediscreen.controller;
 
+import com.mediscreen.dto.ReportEntriesDto;
 import com.mediscreen.model.Note;
 import com.mediscreen.model.Patient;
 import com.mediscreen.service.MediscreenService;
@@ -65,26 +66,37 @@ public class MediscreenController {
     @GetMapping("/noteList/{patientId}")
     public String noteList(@PathVariable("patientId") Long patientId, Model model) {
 
+        Collection<Note> noteList = mediscreenService.readNoteList(patientId);
+        Patient patient = mediscreenService.readPatient(patientId);
+        ReportEntriesDto entries = new ReportEntriesDto();
+        entries.setPatientId(patientId);
+        entries.setAge((int) ChronoUnit.YEARS.between(patient.getBirthDate(), LocalDate.now()));
+        entries.setGender(patient.getGender());
+        entries.setNoteList(noteList);
         Note note = new Note();
         model.addAttribute("note", note);
-        Patient patient = mediscreenService.readPatient(patientId);
         model.addAttribute("patient", patient);
-        model.addAttribute("patientId", patientId);
-        model.addAttribute("age", (int) ChronoUnit.YEARS.between(patient.getBirthDate(), LocalDate.now()));
-        model.addAttribute("gender", patient.getGender());
-        model.addAttribute("noteList", mediscreenService.readNoteList(patientId));
+        model.addAttribute("entries", entries);
+        model.addAttribute("noteList", noteList);
         return "noteList";
     }
 
-    @GetMapping("/generateReport/{patientId}")
-    public String generateReport(@PathVariable("patientId") Long patientId, int age,
-                                 String gender, Collection<Note> noteList, Model model) {
+    @GetMapping("/generateReport")
+    public String generateReport(ReportEntriesDto entries, Model model) {
 
-        mediscreenService.generateReport(patientId, age, gender, noteList);
+        mediscreenService.generateReport(entries.getPatientId(), entries.getAge(), entries.getGender(), entries.getNoteList());
+        Collection<Note> noteList = mediscreenService.readNoteList(entries.getPatientId());
+        Patient patient = mediscreenService.readPatient(entries.getPatientId());
+        entries = new ReportEntriesDto();
+        entries.setPatientId(entries.getPatientId());
+        entries.setAge((int) ChronoUnit.YEARS.between(patient.getBirthDate(), LocalDate.now()));
+        entries.setGender(patient.getGender());
+        entries.setNoteList(noteList);
         Note note = new Note();
         model.addAttribute("note", note);
-        model.addAttribute("patientId", patientId);
-        model.addAttribute("patientList", mediscreenService.readPatientList());
+        model.addAttribute("patient", patient);
+        model.addAttribute("entries", entries);
+        model.addAttribute("noteList", noteList);
         return "redirect:/noteList/{patientId}";
     }
 
