@@ -37,8 +37,9 @@
                 <td th:text="${patient.address}"></td>
                 <td th:text="${patient.phone}"></td>
                 <td style="width: 15%" class="text-center">
-                    <form action="#" th:action="@{'/generateReport/{patientId}'(patientId=${patientId})}" th:object="${patientId}"
+                    <form action="#" th:action="@{'/generateReport/{patientId}?age={age}?gender={gender}'(patientId=${patientId}, age=${age}, gender=${gender})}" th:object="${noteList}"
                           th:method="get"  style="display: flex;">
+                        <input type="text" th:field="*{age}(age=${patientId}" id="age">
                         <button type="submit" class="btn btn-danger btn-sm">
                             Générer un rapport
                         </button>
@@ -50,7 +51,7 @@
     </div>
     <div class="row"><h2>Fiche du patient (Notes)</h2></div>
     <div class="row">
-        <form action="#" th:action="@{'/noteList/{patientId}?age={age}?gender={gender}'(patientId=${patientId}, age=${age}, gender=${gender})}"  th:object="${note}" method="post"
+        <form action="#" th:action="@{'/noteList/{patientId}'(patientId=${patientId})}"  th:object="${note}" method="post"
               class="form-horizontal" style="width: 100%">
             <div class="form-group">
                 <div class="col-sm-10">
