@@ -1,15 +1,19 @@
 package com.mediscreen.controller;
 
+import com.mediscreen.dto.ReportEntriesDto;
 import com.mediscreen.model.Note;
 import com.mediscreen.model.Patient;
 import com.mediscreen.proxy.NoteServiceProxy;
 import com.mediscreen.proxy.PatientServiceProxy;
+import com.mediscreen.proxy.ReportServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Collection;
 
 @RestController
 public class OperationController {
@@ -18,6 +22,8 @@ public class OperationController {
     private PatientServiceProxy patientServiceProxy;
     @Autowired
     private NoteServiceProxy noteServiceProxy;
+    @Autowired
+    private ReportServiceProxy reportServiceProxy;
 
     @PostMapping("/patient/add")
     public Patient addPatient(@RequestParam String family, @RequestParam String given, @RequestParam String dob,
@@ -36,5 +42,20 @@ public class OperationController {
         note.setContent(e);
 
         return noteServiceProxy.createNote(note);
+    }
+
+    @PostMapping("/assess/id")
+    public String getReport(@RequestParam Long patId) {
+
+        Patient patient = patientServiceProxy.readPatient(patId);
+        Collection<Note> noteList = noteServiceProxy.readNoteList(patId);
+        ReportEntriesDto entries = new ReportEntriesDto();
+        entries.setPatientId(patient.getPatientId());
+        entries.setAge((int) ChronoUnit.YEARS.between(patient.getBirthDate(), LocalDate.now()));
+        entries.setGender(patient.getGender());
+        entries.setNoteList(noteList);
+        String riskLevel = reportServiceProxy.generateReport(entries);
+        patient.setRiskLevel(riskLevel);
+        return reportServiceProxy.generateReport(entries);
     }
 }

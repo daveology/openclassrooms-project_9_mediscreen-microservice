@@ -1,5 +1,6 @@
 package com.mediscreen.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -7,6 +8,7 @@ import java.util.Objects;
 
 public class Note {
 
+    @JsonIgnore
     private Long noteId;
     private Long patientId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
