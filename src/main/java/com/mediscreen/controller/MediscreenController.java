@@ -73,7 +73,6 @@ public class MediscreenController {
         entries.setAge((int) ChronoUnit.YEARS.between(patient.getBirthDate(), LocalDate.now()));
         entries.setGender(patient.getGender());
         entries.setNoteList(noteList);
-        System.out.println("TEST=" + entries.getPatientId());
         Note note = new Note();
         model.addAttribute("note", note);
         model.addAttribute("patient", patient);
