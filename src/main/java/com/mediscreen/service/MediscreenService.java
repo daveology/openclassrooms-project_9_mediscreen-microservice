@@ -9,6 +9,8 @@ import com.mediscreen.proxy.ReportServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 
 @Service
@@ -46,10 +48,15 @@ public class MediscreenService {
         return noteServiceProxy.readNoteList(patientId);
     }
 
-    public void generateReport(ReportEntriesDto entries) {
+    public void generateReport(Long patientId, Patient patient) {
 
+        Collection<Note> noteList = readNoteList(patientId);
+        ReportEntriesDto entries = new ReportEntriesDto();
+        entries.setPatientId(patient.getPatientId());
+        entries.setAge((int) ChronoUnit.YEARS.between(patient.getBirthDate(), LocalDate.now()));
+        entries.setGender(patient.getGender());
+        entries.setNoteList(noteList);
         String riskLevel = reportServiceProxy.generateReport(entries);
-        Patient patient = readPatient(entries.getPatientId());
         patient.setRiskLevel(riskLevel);
         patientServiceProxy.updatePatient(patient);
     }

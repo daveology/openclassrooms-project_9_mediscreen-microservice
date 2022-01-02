@@ -73,6 +73,7 @@ public class MediscreenController {
         entries.setAge((int) ChronoUnit.YEARS.between(patient.getBirthDate(), LocalDate.now()));
         entries.setGender(patient.getGender());
         entries.setNoteList(noteList);
+        System.out.println("TEST=" + entries.getPatientId());
         Note note = new Note();
         model.addAttribute("note", note);
         model.addAttribute("patient", patient);
@@ -81,22 +82,15 @@ public class MediscreenController {
         return "noteList";
     }
 
-    @PostMapping("/generateReport")
-    public String generateReport(ReportEntriesDto entries, Model model) {
+    @GetMapping("/generateReport/{patientId}")
+    public String generateReport(@PathVariable("patientId") Long patientId, Model model) {
 
-        mediscreenService.generateReport(entries);
-        Collection<Note> noteList = mediscreenService.readNoteList(entries.getPatientId());
-        Patient patient = mediscreenService.readPatient(entries.getPatientId());
-        entries = new ReportEntriesDto();
-        entries.setPatientId(patient.getPatientId());
-        entries.setAge((int) ChronoUnit.YEARS.between(patient.getBirthDate(), LocalDate.now()));
-        entries.setGender(patient.getGender());
-        entries.setNoteList(noteList);
+        Patient patient = mediscreenService.readPatient(patientId);
+        mediscreenService.generateReport(patientId, patient);
         Note note = new Note();
         model.addAttribute("note", note);
         model.addAttribute("patient", patient);
-        model.addAttribute("entries", entries);
-        model.addAttribute("noteList", noteList);
+        model.addAttribute("patientId", patientId);
         return "redirect:/noteList/{patientId}";
     }
 

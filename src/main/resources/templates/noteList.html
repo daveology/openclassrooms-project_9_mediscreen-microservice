@@ -37,12 +37,7 @@
                 <td th:text="${patient.address}"></td>
                 <td th:text="${patient.phone}"></td>
                 <td style="width: 15%" class="text-center">
-                    <form action="#" th:action="@{'/generateReport'}" th:object="${entries}"
-                          th:method="post"  style="display: flex;">
-                        <button type="submit" class="btn btn-danger btn-sm">
-                            Générer un rapport
-                        </button>
-                    </form>
+                    <a th:href="@{'/generateReport/{patientId}'(patientId=${patient.patientId})}" class="btn btn-secondary btn-sm">Générer un rapport</a>
                 </td>
             </tr>
             </tbody>
