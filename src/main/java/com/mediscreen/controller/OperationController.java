@@ -51,11 +51,28 @@ public class OperationController {
         Collection<Note> noteList = noteServiceProxy.readNoteList(patId);
         ReportEntriesDto entries = new ReportEntriesDto();
         entries.setPatientId(patient.getPatientId());
+        entries.setFullName(patient.getFullName());
         entries.setAge((int) ChronoUnit.YEARS.between(patient.getBirthDate(), LocalDate.now()));
         entries.setGender(patient.getGender());
         entries.setNoteList(noteList);
         String riskLevel = reportServiceProxy.generateReport(entries);
         patient.setRiskLevel(riskLevel);
-        return reportServiceProxy.generateReport(entries);
+        return reportServiceProxy.getReport(entries);
+    }
+
+    @PostMapping("/assess/familyName")
+    public String getReportByName(@RequestParam String familyName) {
+
+        Patient patient = patientServiceProxy.readPatientByName(familyName);
+        Collection<Note> noteList = noteServiceProxy.readNoteList(patient.getPatientId());
+        ReportEntriesDto entries = new ReportEntriesDto();
+        entries.setPatientId(patient.getPatientId());
+        entries.setFullName(patient.getFullName());
+        entries.setAge((int) ChronoUnit.YEARS.between(patient.getBirthDate(), LocalDate.now()));
+        entries.setGender(patient.getGender());
+        entries.setNoteList(noteList);
+        String riskLevel = reportServiceProxy.generateReport(entries);
+        patient.setRiskLevel(riskLevel);
+        return reportServiceProxy.getReport(entries);
     }
 }

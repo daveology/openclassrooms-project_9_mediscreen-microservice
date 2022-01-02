@@ -10,4 +10,7 @@ public interface ReportServiceProxy {
 
     @RequestMapping(method = RequestMethod.POST, value = "/generateReport", consumes = "application/json")
     String generateReport(ReportEntriesDto entries);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/getReport", consumes = "application/json")
+    String getReport(ReportEntriesDto entries);
 }

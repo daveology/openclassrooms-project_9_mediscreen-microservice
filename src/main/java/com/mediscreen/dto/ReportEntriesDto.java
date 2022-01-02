@@ -7,6 +7,7 @@ import java.util.Collection;
 public class ReportEntriesDto {
 
     private Long patientId;
+    private String fullName;
     private int age;
     private String gender;
     Collection<Note> noteList;
@@ -17,6 +18,14 @@ public class ReportEntriesDto {
 
     public void setPatientId(Long patientId) {
         this.patientId = patientId;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public int getAge() {

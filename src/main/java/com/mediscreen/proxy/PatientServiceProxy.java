@@ -15,6 +15,9 @@ public interface PatientServiceProxy {
     @RequestMapping(method = RequestMethod.GET, value ="/patient/{patientId}")
     Patient readPatient(@PathVariable("patientId") Long id);
 
+    @RequestMapping(method = RequestMethod.GET, value ="/getPatientByName/{fullName}")
+    Patient readPatientByName(@PathVariable("fullName") String fullName);
+
     @GetMapping(value="/patientList")
     Collection<Patient> readPatientList();
 
