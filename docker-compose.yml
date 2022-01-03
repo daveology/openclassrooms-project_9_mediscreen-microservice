@@ -1,0 +1,35 @@
+services:
+  tourguide:
+    image: mn5503/Mediscreen
+    container_name: Mediscreen
+    depends_on:
+      - Patient
+      - Note
+      - Report
+    ports:
+      - 8081:8081
+    networks:
+      - mediscreen-bridge
+  gps:
+    image: mn5503/Patient
+    container_name: Patient
+    ports:
+      - 7911:7911
+    networks:
+      - mediscreen-bridge
+  reward:
+    image: mn5503/Note
+    container_name: Note
+    ports:
+      - 7922:7922
+    networks:
+      - mediscreen-bridge
+  trippricer:
+    image: mn5503/Report
+    container_name: Report
+    ports:
+      - 7933:7933
+    networks:
+      - mediscreen-bridge
+networks:
+  mediscreen-bridge:
