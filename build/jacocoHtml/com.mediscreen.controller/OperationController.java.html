@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OperationController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">openclassrooms_9th-project_mediscreen-microservice</a> &gt; <a href="index.source.html" class="el_package">com.mediscreen.controller</a> &gt; <span class="el_source">OperationController.java</span></div><h1>OperationController.java</h1><pre class="source lang-java linenums">package com.mediscreen.controller;
+
+import com.mediscreen.dto.ReportEntriesDto;
+import com.mediscreen.model.Note;
+import com.mediscreen.model.Patient;
+import com.mediscreen.proxy.NoteServiceProxy;
+import com.mediscreen.proxy.PatientServiceProxy;
+import com.mediscreen.proxy.ReportServiceProxy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Collection;
+
+@RestController
+<span class="fc" id="L19">public class OperationController {</span>
+
+    @Autowired
+    private PatientServiceProxy patientServiceProxy;
+    @Autowired
+    private NoteServiceProxy noteServiceProxy;
+    @Autowired
+    private ReportServiceProxy reportServiceProxy;
+
+    @PostMapping(&quot;/patient/add&quot;)
+    public Patient addPatient(@RequestParam String family, @RequestParam String given, @RequestParam String dob,
+                              @RequestParam String sex, @RequestParam String address, @RequestParam String phone) {
+
+<span class="fc" id="L32">        Patient patient = new Patient(family, given, sex, LocalDate.parse(dob), address, phone);</span>
+<span class="fc" id="L33">        return patientServiceProxy.addPatient(patient);</span>
+    }
+
+    @PostMapping(&quot;/patHistory/add&quot;)
+    public Note addNote(@RequestParam Long patId, @RequestParam String e) {
+
+<span class="fc" id="L39">        Note note = new Note();</span>
+<span class="fc" id="L40">        note.setPatientId(patId);</span>
+<span class="fc" id="L41">        note.setNoteDate(LocalDate.now());</span>
+<span class="fc" id="L42">        note.setContent(e);</span>
+
+<span class="fc" id="L44">        return noteServiceProxy.createNote(note);</span>
+    }
+
+    @PostMapping(&quot;/assess/id&quot;)
+    public String getReport(@RequestParam Long patId) {
+
+<span class="fc" id="L50">        Patient patient = patientServiceProxy.readPatient(patId);</span>
+<span class="fc" id="L51">        Collection&lt;Note&gt; noteList = noteServiceProxy.readNoteList(patId);</span>
+<span class="fc" id="L52">        ReportEntriesDto entries = new ReportEntriesDto();</span>
+<span class="fc" id="L53">        entries.setPatientId(patient.getPatientId());</span>
+<span class="fc" id="L54">        entries.setFullName(patient.getFullName());</span>
+<span class="fc" id="L55">        entries.setAge((int) ChronoUnit.YEARS.between(patient.getBirthDate(), LocalDate.now()));</span>
+<span class="fc" id="L56">        entries.setGender(patient.getGender());</span>
+<span class="fc" id="L57">        entries.setNoteList(noteList);</span>
+<span class="fc" id="L58">        String riskLevel = reportServiceProxy.generateReport(entries);</span>
+<span class="fc" id="L59">        patient.setRiskLevel(riskLevel);</span>
+<span class="fc" id="L60">        return reportServiceProxy.getReport(entries);</span>
+    }
+
+    @PostMapping(&quot;/assess/familyName&quot;)
+    public String getReportByName(@RequestParam String familyName) {
+
+<span class="fc" id="L66">        Patient patient = patientServiceProxy.readPatientByName(familyName);</span>
+<span class="fc" id="L67">        Collection&lt;Note&gt; noteList = noteServiceProxy.readNoteList(patient.getPatientId());</span>
+<span class="fc" id="L68">        ReportEntriesDto entries = new ReportEntriesDto();</span>
+<span class="fc" id="L69">        entries.setPatientId(patient.getPatientId());</span>
+<span class="fc" id="L70">        entries.setFullName(patient.getFullName());</span>
+<span class="fc" id="L71">        entries.setAge((int) ChronoUnit.YEARS.between(patient.getBirthDate(), LocalDate.now()));</span>
+<span class="fc" id="L72">        entries.setGender(patient.getGender());</span>
+<span class="fc" id="L73">        entries.setNoteList(noteList);</span>
+<span class="fc" id="L74">        String riskLevel = reportServiceProxy.generateReport(entries);</span>
+<span class="fc" id="L75">        patient.setRiskLevel(riskLevel);</span>
+<span class="fc" id="L76">        return reportServiceProxy.getReport(entries);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
