@@ -5,7 +5,7 @@
         <meta charset="utf-8"/>
         <title>Liste des patients | Mediscreen App</title>
         <link rel="stylesheet" type="text/css" href="../../static/bootstrap/bootstrap.min.css"
-              th:href="@{bootstrap/bootstrap.min.css}" />
+              th:href="@{/bootstrap/bootstrap.min.css}" />
     </head>
     <body style="background-color: darkseagreen;">
         <div class="container">
@@ -18,7 +18,7 @@
             <div class="row"><h2>Liste des patients</h2></div>
             <div class="row">
                 <form action="#" th:action="@{'/patientList'}" th:method="delete" >
-                    <a href="/patient/add" class="btn btn-primary btn-sm" style="margin-right: 10px;
+                    <a href="/patient/create" class="btn btn-primary btn-sm" style="margin-right: 10px;
                     margin-bottom: 10px;background-color: darkgreen; border-color: darkgreen">Ajouter un patient</a>
                     <input type="hidden" name="_method" value="delete" />
                     <button type="submit" id="submitAllButton" class="btn btn-danger btn-sm" style="margin-right: 10px;
@@ -27,9 +27,8 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Prénom</th>
-                        <th>Nom</th>
+                        <th>Risque</th>
+                        <th>Nom complet</th>
                         <th>Sexe</th>
                         <th>Date de naissance</th>
                         <th>Adresse postale</th>
@@ -39,9 +38,8 @@
                     </thead>
                     <tbody>
                         <tr th:each="patient : ${patientList}">
-                            <td th:text="${patient.patientId}"></td>
-                            <td style="font-weight: bold;" th:text="${patient.firstName}"></td>
-                            <td style="font-weight: bold;" th:text="${patient.lastName}"></td>
+                            <td style="font-weight: bold;text-transform: uppercase;" th:text="${patient.riskLevel}"></td>
+                            <td><a th:href="@{'/noteList/{patientId}'(patientId=${patient.patientId})}" th:text="${patient.fullName}" class="btn btn-secondary btn-sm" style="min-width: 125px;"></a></td>
                             <td th:text="${patient.gender}"></td>
                             <td th:text="${patient.birthDate}"></td>
                             <td th:text="${patient.address}"></td>

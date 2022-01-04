@@ -8,8 +8,8 @@ import java.util.Objects;
 public class Patient {
 
     private Long patientId;
-    private String firstName;
-    private String lastName;
+    private String riskLevel;
+    private String fullName;
     private String gender;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
@@ -24,20 +24,16 @@ public class Patient {
         this.patientId = patientId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getRiskLevel() { return riskLevel; }
+
+    public void setRiskLevel(String riskLevel) { this.riskLevel = riskLevel; }
+
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullName(String firstName) {
+        this.fullName = firstName;
     }
 
     public String getGender() {
@@ -74,24 +70,13 @@ public class Patient {
 
     public Patient() {}
 
-    public Patient(String firstName, String lastName, String gender,
+    public Patient(String riskLevel, String fullName, String gender,
                    LocalDate birthDate, String address, String phone) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.riskLevel = riskLevel;
+        this.fullName = fullName;
         this.gender = gender;
         this.birthDate = birthDate;
         this.address = address;
         this.phone = phone;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Patient patient = (Patient) o;
-        return Objects.equals(patientId, patient.patientId) && Objects.equals(firstName, patient.firstName)
-                && Objects.equals(lastName, patient.lastName) && Objects.equals(gender, patient.gender)
-                && Objects.equals(birthDate, patient.birthDate) && Objects.equals(address, patient.address)
-                && Objects.equals(phone, patient.phone);
     }
 }

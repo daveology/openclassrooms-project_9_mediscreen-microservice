@@ -1,0 +1,32 @@
+services:
+  patient:
+    image: mn5503/patient
+    ports:
+      - 7911:7911
+  mediscreen:
+    image: mn5503/mediscreen
+    container_name: Mediscreen
+    ports:
+      - 8081:8081
+    networks:
+      - mediscreen-bridge
+    depends_on:
+      - Patient
+      - Note
+      - Report
+  note:
+    image: mn5503/note
+    container_name: Note
+    ports:
+      - 7922:7922
+    networks:
+      - mediscreen-bridge
+  report:
+    image: mn5503/report
+    container_name: Report
+    ports:
+      - 7933:7933
+    networks:
+      - mediscreen-bridge
+networks:
+  mediscreen-bridge:

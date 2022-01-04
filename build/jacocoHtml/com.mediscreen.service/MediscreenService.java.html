@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MediscreenService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">openclassrooms_9th-project_mediscreen-microservice</a> &gt; <a href="index.source.html" class="el_package">com.mediscreen.service</a> &gt; <span class="el_source">MediscreenService.java</span></div><h1>MediscreenService.java</h1><pre class="source lang-java linenums">package com.mediscreen.service;
+
+import com.mediscreen.dto.ReportEntriesDto;
+import com.mediscreen.model.Note;
+import com.mediscreen.model.Patient;
+import com.mediscreen.proxy.NoteServiceProxy;
+import com.mediscreen.proxy.PatientServiceProxy;
+import com.mediscreen.proxy.ReportServiceProxy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Collection;
+
+@Service
+<span class="fc" id="L17">public class MediscreenService {</span>
+
+    @Autowired
+    private PatientServiceProxy patientServiceProxy;
+    @Autowired
+    private NoteServiceProxy noteServiceProxy;
+    @Autowired
+    private ReportServiceProxy reportServiceProxy;
+
+    public void createPatient(Patient patient) {
+
+<span class="fc" id="L28">        patientServiceProxy.createPatient(patient);</span>
+<span class="fc" id="L29">    }</span>
+
+    public void createNote(Note note) {
+
+<span class="nc" id="L33">        noteServiceProxy.createNote(note);</span>
+<span class="nc" id="L34">    }</span>
+
+    public Patient readPatient(Long patientId) {
+
+<span class="fc" id="L38">        return patientServiceProxy.readPatient(patientId);</span>
+    }
+
+    public Collection&lt;Patient&gt; readPatientList() {
+
+<span class="fc" id="L43">        return patientServiceProxy.readPatientList();</span>
+    }
+
+    public Collection&lt;Note&gt; readNoteList(Long patientId) {
+
+<span class="fc" id="L48">        return noteServiceProxy.readNoteList(patientId);</span>
+    }
+
+    public void generateReport(Long patientId, Patient patient) {
+
+<span class="fc" id="L53">        Collection&lt;Note&gt; noteList = readNoteList(patientId);</span>
+<span class="fc" id="L54">        ReportEntriesDto entries = new ReportEntriesDto();</span>
+<span class="fc" id="L55">        entries.setPatientId(patient.getPatientId());</span>
+<span class="fc" id="L56">        entries.setAge((int) ChronoUnit.YEARS.between(patient.getBirthDate(), LocalDate.now()));</span>
+<span class="fc" id="L57">        entries.setGender(patient.getGender());</span>
+<span class="fc" id="L58">        entries.setNoteList(noteList);</span>
+<span class="fc" id="L59">        String riskLevel = reportServiceProxy.generateReport(entries);</span>
+<span class="fc" id="L60">        patient.setRiskLevel(riskLevel);</span>
+<span class="fc" id="L61">        patientServiceProxy.updatePatient(patient);</span>
+<span class="fc" id="L62">    }</span>
+
+    public void updatePatient(Patient patient) {
+
+<span class="fc" id="L66">        patientServiceProxy.updatePatient(patient);</span>
+<span class="fc" id="L67">    }</span>
+
+    public void deletePatient(Long patientId) {
+
+<span class="nc" id="L71">        patientServiceProxy.deletePatient(patientId);</span>
+<span class="nc" id="L72">    }</span>
+
+    public void deleteNoteById(Long noteId) {
+
+<span class="nc" id="L76">        noteServiceProxy.deleteNote(noteId);</span>
+<span class="nc" id="L77">    }</span>
+
+    public void deletePatientList() {
+
+<span class="nc" id="L81">        patientServiceProxy.deletePatientList();</span>
+<span class="nc" id="L82">    }</span>
+
+    public void deleteNoteList() {
+
+<span class="nc" id="L86">        noteServiceProxy.deleteNoteList();</span>
+<span class="nc" id="L87">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

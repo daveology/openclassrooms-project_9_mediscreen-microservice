@@ -12,8 +12,11 @@ public interface PatientServiceProxy {
     @RequestMapping(method = RequestMethod.POST, value = "/patient/add", consumes = "application/json")
     Patient createPatient(Patient patient);
 
-    @GetMapping(value="/patient/{patientId}")
+    @RequestMapping(method = RequestMethod.GET, value ="/patient/{patientId}")
     Patient readPatient(@PathVariable("patientId") Long id);
+
+    @RequestMapping(method = RequestMethod.GET, value ="/getPatientByName/{fullName}")
+    Patient readPatientByName(@PathVariable("fullName") String fullName);
 
     @GetMapping(value="/patientList")
     Collection<Patient> readPatientList();
@@ -26,4 +29,7 @@ public interface PatientServiceProxy {
 
     @DeleteMapping(value="/patientList")
     void deletePatientList();
+
+    @RequestMapping(method = RequestMethod.POST, value = "/addPatient", consumes = "application/json")
+    Patient addPatient(Patient patient);
 }

@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <title>Mis à jour du patient | Mediscreen App</title>
     <link rel="stylesheet" type="text/css" href="../../static/bootstrap/bootstrap.min.css"
-          th:href="@{bootstrap/bootstrap.min.css}" />
+          th:href="@{/bootstrap/bootstrap.min.css}" />
 </head>
 <body style="background-color: darkseagreen;">
 <div class="container">
@@ -23,26 +23,26 @@
     <form action="#" th:action="@{/patient/update}" th:object="${patient}" method="post"
           class="form-horizontal" style="width: 100%">
         <div class="form-group">
-            <label for="firstName" class="col-sm-2 control-label">Prénom</label>
+            <label for="riskLevel" class="col-sm-2 control-label">Niveau de risque</label>
             <div class="col-sm-10">
-                <input type="text" th:field="*{firstName}" id="firstName"
-                       placeholder="Votre prénom..." class="col-4">
-                <p class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+                <input type="text" th:field="*{riskLevel}" id="riskLevel"
+                       placeholder="Le niveau de risque..." class="col-4">
+                <p class="text-danger" th:if="${#fields.hasErrors('riskLevel')}" th:errors="*{riskLevel}"></p>
             </div>
         </div>
         <div class="form-group">
-            <label for="lastName" class="col-sm-2 control-label">Nom</label>
+            <label for="fullName" class="col-sm-2 control-label">Nom</label>
             <div class="col-sm-10">
-                <input type="text" th:field="*{lastName}" id="lastName"
-                       placeholder="Votre nom de famille..." class="col-4">
-                <p class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+                <input type="text" th:field="*{fullName}" id="fullName"
+                       placeholder="Le nom complet..." class="col-4">
+                <p class="text-danger" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></p>
             </div>
         </div>
         <div class="form-group">
             <label for="birthDate" class="col-sm-2 control-label">Date de naissance</label>
             <div class="col-sm-10">
                 <input type="text" th:field="*{birthDate}" id="birthDate"
-                       placeholder="Votre date de naissance..." class="col-4">
+                       placeholder="La date de naissance..." class="col-4">
                 <p class="text-danger" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></p>
             </div>
         </div>
@@ -50,7 +50,7 @@
             <label for="address" class="col-sm-2 control-label">Courriel</label>
             <div class="col-sm-10">
                 <input type="text" th:field="*{address}" id="address"
-                       placeholder="Votre adresse postale..." class="col-4">
+                       placeholder="L'adresse postale..." class="col-4">
                 <p class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
             </div>
         </div>
@@ -58,7 +58,7 @@
             <label for="phone" class="col-sm-2 control-label">Téléphone</label>
             <div class="col-sm-10">
                 <input type="text" th:field="*{phone}" id="phone"
-                       placeholder="Votre n° de téléphone..." class="col-4">
+                       placeholder="Le n° de téléphone..." class="col-4">
                 <p class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
             </div>
         </div>
