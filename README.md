@@ -42,6 +42,8 @@
     <img src="src/main/resources/static/images/intro.PNG" alt="header" />
 </div>
 
+### Detect risk factors for disease using predictive analysis of patient populations. This permits to identify the most vulnerable persons to anticipate any critical situation and act quickly to save more lives.
+
 <!-- ACKNOWLEDGEMENTS -->
 ## 📝 Acknowledgements
 <p id="acknowledgements"></p>
