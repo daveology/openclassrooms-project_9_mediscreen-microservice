@@ -79,15 +79,4 @@ public class Patient {
         this.address = address;
         this.phone = phone;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Patient patient = (Patient) o;
-        return Objects.equals(patientId, patient.patientId) && Objects.equals(riskLevel, patient.riskLevel)
-                && Objects.equals(fullName, patient.fullName) && Objects.equals(gender, patient.gender)
-                && Objects.equals(birthDate, patient.birthDate) && Objects.equals(address, patient.address)
-                && Objects.equals(phone, patient.phone);
-    }
 }

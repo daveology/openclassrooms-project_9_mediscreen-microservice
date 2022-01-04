@@ -55,12 +55,4 @@ public class Note {
         this.noteDate = noteDate;
         this.content = content;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Note note = (Note) o;
-        return Objects.equals(noteId, note.noteId) && Objects.equals(patientId, note.patientId) && Objects.equals(noteDate, note.noteDate) && Objects.equals(content, note.content);
-    }
 }
