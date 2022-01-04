@@ -33,6 +33,10 @@ jacocoTestReport {
         csv.enabled false
         html.destination file("${buildDir}/jacocoHtml")
     }
+    classDirectories.setFrom(
+            fileTree(dir: "build/classes/java/main")
+                    .filter({file -> !file.name.contains('MediscreenController')})
+    )
 }
 
 test.finalizedBy jacocoTestReport

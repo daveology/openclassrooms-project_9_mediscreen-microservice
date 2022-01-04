@@ -32,6 +32,30 @@ class MediscreenServiceTests {
     }
 
     @Test
+    public void shouldUpdatePatient() {
+
+        Patient expected = patientServiceProxy.createPatient(new Patient("None", "Harry POTTER", "M", LocalDate.now().minusYears(12),
+                "4, Privet Drive, Little Whinging", "791-112-3456"));
+        expected.setRiskLevel("BORDERLINE");
+       mediscreenService.updatePatient(expected);
+       Patient patient = patientServiceProxy.readPatient(expected.getPatientId());
+
+        assertTrue(expected.getRiskLevel().equals(patient.getRiskLevel()));
+    }
+
+    @Test
+    public void shouldGenerateReport() {
+
+        Patient expected = patientServiceProxy.createPatient(new Patient("BORDERLINE", "Harry POTTER", "M", LocalDate.now().minusYears(12),
+                "4, Privet Drive, Little Whinging", "791-112-3456"));
+        expected.setRiskLevel("BORDERLINE");
+        mediscreenService.generateReport(expected.getPatientId(), expected);
+        Patient patient = patientServiceProxy.readPatient(expected.getPatientId());
+
+        assertTrue(patient.getRiskLevel().equals("NONE"));
+    }
+
+    @Test
     public void shouldGetNoteList() {
 
         Patient patient = patientServiceProxy.createPatient(new Patient("None", "Harry POTTER", "M", LocalDate.now().minusYears(12),
