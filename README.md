@@ -44,6 +44,12 @@
 
 ### Detect risk factors for disease using predictive analysis of patient populations. This permits to identify the most vulnerable persons to anticipate any critical situation and act quickly to save more lives.
 
+#### Microservice Architecture
+
+<div align="center">
+    <img src="https://i.imgur.com/Z9mP361.jpg" alt="diagram" />
+</div>
+
 <!-- ACKNOWLEDGEMENTS -->
 ## 📝 Acknowledgements
 <p id="acknowledgements"></p>
